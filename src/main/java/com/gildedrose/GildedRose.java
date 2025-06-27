@@ -15,16 +15,26 @@ class GildedRose {
     }
 
     public void updateQuality() {
-        for (Item item : items) {
-            ItemQuality qualityStrategy = new NormalQuality();
+        items.stream().forEach(item -> createStrategyAndUpdateQuality(item));
+    }
 
-            ItemAdapter itemAdapter = new ItemAdapter(item);
+    private void createStrategyAndUpdateQuality(Item item) {
+        updateQualityWithStrategy(createStrategyForItems(item), item);
+    }
 
-            qualityStrategy.updateQualityBeforeSellInByDate(itemAdapter);
+    private void updateQualityWithStrategy(ItemQuality strategy, Item item) {
+        ItemAdapter itemAdapter = new ItemAdapter(item);
+        updateQualityOfItem(strategy, itemAdapter);
+    }
 
-            qualityStrategy.decrementSellInDays(itemAdapter);
 
-            qualityStrategy.updateQualityAfterSellInByDate(itemAdapter);
-        }
+    private void updateQualityOfItem(ItemQuality strategy, ItemAdapter itemAdapter) {
+        strategy.updateQualityBeforeSellInByDate(itemAdapter);
+        strategy.decrementSellInDays(itemAdapter);
+        strategy.updateQualityAfterSellInByDate(itemAdapter);
+    }
+
+    private ItemQuality createStrategyForItems(Item item) {
+        return new NormalQuality();
     }
 }
