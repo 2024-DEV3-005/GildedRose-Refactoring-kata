@@ -29,7 +29,7 @@ import org.approvaltests.Approvals;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-import java.util.Arrays;
+import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
@@ -39,23 +39,23 @@ class GildedRoseTest {
     @Test
     @DisplayName("Item name should not change after update")
     void shouldReturnTheItemNameAsIs() {
-        Item[] items = new Item[]{new Item(ITEM_NAME_FOO, ZERO_DAYS, ZERO_DAYS)};
+        List<Item> items = List.of(new Item(ITEM_NAME_FOO, ZERO_DAYS, ZERO_DAYS));
         GildedRose app = new GildedRose(items);
         app.updateQuality();
-        assertEquals(ITEM_NAME_FOO, app.items[ZERO_DAYS].name);
+        assertEquals(ITEM_NAME_FOO, app.items.get(0).name);
     }
 
     @Test
     @DisplayName("should validate the legacy output for 31 days")
     void shouldMatchGoldenOutputOver31Days() {
-        Item[] items = new Item[]{new Item(DEXTERITY_VEST, TEN_DAYS_TO_SELL, QUALITY_OF_TWENTY),
+        List<Item> items = List.of(new Item(DEXTERITY_VEST, TEN_DAYS_TO_SELL, QUALITY_OF_TWENTY),
                 new Item(AGED_BRIE, TWO_DAYS_TO_SELL, MIN_QUALITY),
                 new Item(ELIXIR_OF_THE_MONGOOSE, FIVE_DAYS_TO_SELL, QUALITY_OF_SEVEN),
                 new Item(SULFURAS, ZERO_DAYS, SULFURAS_MAX_QUALITY),
                 new Item(SULFURAS, EXPIRED_BY_ONE_DAY, SULFURAS_MAX_QUALITY),
                 new Item(BACKSTAGE_PASSES, FIFTEEN_DAYS_TO_SELL, QUALITY_OF_TWENTY),
                 new Item(BACKSTAGE_PASSES, TEN_DAYS_TO_SELL, ONE_SHORT_OF_MAX_QUALITY),
-                new Item(BACKSTAGE_PASSES, FIVE_DAYS_TO_SELL, ONE_SHORT_OF_MAX_QUALITY)};
+                new Item(BACKSTAGE_PASSES, FIVE_DAYS_TO_SELL, ONE_SHORT_OF_MAX_QUALITY));
 
         GildedRose app = new GildedRose(items);
         StringBuilder output = new StringBuilder();
@@ -68,13 +68,12 @@ class GildedRoseTest {
         Approvals.verify(output.toString());
     }
 
-    private void appendOutputRenderingDays(int day, StringBuilder output, Item[] items) {
+    private void appendOutputRenderingDays(int day, StringBuilder output, List<Item> items) {
         output.append(HEADING_PREFIX).append(day).append(HEADING_SUFFIX);
         output.append(COLUMN_HEADING).append(LINE_BREAK);
-        output.append(Arrays.stream(items)
+        output.append(items.stream()
                 .map(Item::toString)
                 .collect(Collectors.joining(LINE_BREAK))).append(DOUBLE_LINE_BREAK);
     }
-
 
 }
