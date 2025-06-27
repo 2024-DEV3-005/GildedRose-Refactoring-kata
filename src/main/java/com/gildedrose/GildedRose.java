@@ -35,14 +35,14 @@ class GildedRose {
             if (!item.name.equals(AGED_BRIE)) {
                 if (!item.name.equals(BACKSTAGE_PASSES)) {
                     if (item.quality > MIN_QUALITY && !item.name.equals(SULFURAS)) {
-                        item.quality = item.quality - BASE_QUALITY_UNIT;
+                        decreaseQuality(item);
                     }
                 } else {
                     item.quality = MIN_QUALITY;
                 }
             } else {
                 if (item.quality < MAX_QUALITY) {
-                    item.quality = item.quality + BASE_QUALITY_UNIT;
+                    increaseQuality(item);
                 }
             }
         }
@@ -52,23 +52,31 @@ class GildedRose {
         if (!item.name.equals(AGED_BRIE)
                 && !item.name.equals(BACKSTAGE_PASSES)) {
             if (item.quality > MIN_QUALITY && !item.name.equals(SULFURAS)) {
-                item.quality = item.quality - BASE_QUALITY_UNIT;
+                decreaseQuality(item);
             }
         } else {
             if (item.quality < MAX_QUALITY) {
-                item.quality = item.quality + BASE_QUALITY_UNIT;
+                increaseQuality(item);
 
                 if (item.name.equals(BACKSTAGE_PASSES)) {
                     if (item.sellIn < QUALITY_OF_ELEVEN && item.quality < MAX_QUALITY) {
-                        item.quality = item.quality + BASE_QUALITY_UNIT;
+                        increaseQuality(item);
                     }
 
                     if (item.sellIn < QUALITY_OF_SIX && item.quality < MAX_QUALITY) {
-                        item.quality = item.quality + BASE_QUALITY_UNIT;
+                        increaseQuality(item);
                     }
                 }
             }
         }
+    }
+
+    private void decreaseQuality(Item item) {
+        item.quality = item.quality - BASE_QUALITY_UNIT;
+    }
+
+    private void increaseQuality(Item item) {
+        item.quality = item.quality + BASE_QUALITY_UNIT;
     }
 
     private void decrementSellInDays(Item item) {
