@@ -56,7 +56,7 @@ public class NormalQuality implements ItemQuality {
                         decreaseQuality(item);
                     }
                 } else {
-                    item.quality = MIN_QUALITY;
+                    setQuality(item);
                 }
             } else {
                 if (item.quality < MAX_QUALITY) {
@@ -67,14 +67,18 @@ public class NormalQuality implements ItemQuality {
     }
 
     private void decreaseQuality(Item item) {
-        item.quality = item.quality - BASE_QUALITY_UNIT;
+        item.quality = Math.max(0,item.quality - BASE_QUALITY_UNIT);
     }
 
     private void increaseQuality(Item item) {
-        item.quality = item.quality + BASE_QUALITY_UNIT;
+        item.quality = Math.min(50,item.quality + BASE_QUALITY_UNIT);
     }
 
     private boolean isItemExpired(Item item) {
         return item.sellIn < DAY_OF_EXPIERY;
+    }
+
+    public void setQuality(Item item) {
+        item.quality = Math.max(0, Math.min(50, MIN_QUALITY));
     }
 }
