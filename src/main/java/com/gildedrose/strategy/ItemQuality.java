@@ -1,12 +1,12 @@
 package com.gildedrose.strategy;
 
-import com.gildedrose.Item;
+import com.gildedrose.adapter.ItemAdapter;
 
 public interface ItemQuality {
 
-    void updateQualityBeforeSellInByDate(Item item);
+    void updateQualityBeforeSellInByDate(ItemAdapter item);
 
-    void decrementSellInDays(Item item);
+    void decrementSellInDays(ItemAdapter item);
 
-    void updateQualityAfterSellInByDate(Item item);
+    void updateQualityAfterSellInByDate(ItemAdapter item);
 }

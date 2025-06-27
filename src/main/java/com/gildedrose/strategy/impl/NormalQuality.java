@@ -3,82 +3,62 @@ package com.gildedrose.strategy.impl;
 import static com.gildedrose.constants.AppConstants.AGED_BRIE;
 import static com.gildedrose.constants.AppConstants.BACKSTAGE_PASSES;
 import static com.gildedrose.constants.AppConstants.BASE_QUALITY_UNIT;
-import static com.gildedrose.constants.AppConstants.DAY_OF_EXPIERY;
 import static com.gildedrose.constants.AppConstants.MAX_QUALITY;
 import static com.gildedrose.constants.AppConstants.MIN_QUALITY;
 import static com.gildedrose.constants.AppConstants.QUALITY_OF_ELEVEN;
 import static com.gildedrose.constants.AppConstants.QUALITY_OF_SIX;
 import static com.gildedrose.constants.AppConstants.SULFURAS;
 
-import com.gildedrose.Item;
+import com.gildedrose.adapter.ItemAdapter;
 import com.gildedrose.strategy.ItemQuality;
 
 public class NormalQuality implements ItemQuality {
 
-    public void updateQualityBeforeSellInByDate(Item item) {
-        if (!item.name.equals(AGED_BRIE)
-                && !item.name.equals(BACKSTAGE_PASSES)) {
-            if (item.quality > MIN_QUALITY && !item.name.equals(SULFURAS)) {
-                decreaseQuality(item);
+    public void updateQualityBeforeSellInByDate(ItemAdapter item) {
+        if (!item.getName().equals(AGED_BRIE)
+                && !item.getName().equals(BACKSTAGE_PASSES)) {
+            if (item.getQuality() > MIN_QUALITY && !item.getName().equals(SULFURAS)) {
+                item.decreaseQuality(BASE_QUALITY_UNIT);
             }
         } else {
-            if (item.quality < MAX_QUALITY) {
-                increaseQuality(item);
+            if (item.getQuality() < MAX_QUALITY) {
+                item.increaseQuality(BASE_QUALITY_UNIT);
 
-                if (item.name.equals(BACKSTAGE_PASSES)) {
-                    if (item.sellIn < QUALITY_OF_ELEVEN && item.quality < MAX_QUALITY) {
-                        increaseQuality(item);
+                if (item.getName().equals(BACKSTAGE_PASSES)) {
+                    if (item.getSellIn() < QUALITY_OF_ELEVEN && item.getQuality() < MAX_QUALITY) {
+                        item.increaseQuality(BASE_QUALITY_UNIT);
                     }
 
-                    if (item.sellIn < QUALITY_OF_SIX && item.quality < MAX_QUALITY) {
-                        increaseQuality(item);
+                    if (item.getSellIn() < QUALITY_OF_SIX && item.getQuality() < MAX_QUALITY) {
+                        item.increaseQuality(BASE_QUALITY_UNIT);
                     }
                 }
             }
         }
     }
 
-    public void decrementSellInDays(Item item) {
-        if (!item.name.equals(SULFURAS)) {
-            decrementSellIn(item);
+    public void decrementSellInDays(ItemAdapter item) {
+        if (!item.getName().equals(SULFURAS)) {
+            item.decrementSellIn();
         }
     }
 
-    private void decrementSellIn(Item item) {
-        item.sellIn--;
-    }
-
-    public void updateQualityAfterSellInByDate(Item item) {
-        if (isItemExpired(item)) {
-            if (!item.name.equals(AGED_BRIE)) {
-                if (!item.name.equals(BACKSTAGE_PASSES)) {
-                    if (item.quality > MIN_QUALITY && !item.name.equals(SULFURAS)) {
-                        decreaseQuality(item);
+    public void updateQualityAfterSellInByDate(ItemAdapter item) {
+        if (item.isItemExpired()) {
+            if (!item.getName().equals(AGED_BRIE)) {
+                if (!item.getName().equals(BACKSTAGE_PASSES)) {
+                    if (item.getQuality() > MIN_QUALITY && !item.getName().equals(SULFURAS)) {
+                        item.decreaseQuality(BASE_QUALITY_UNIT);
                     }
                 } else {
-                    setQuality(item);
+                    item.setQuality(MIN_QUALITY);
                 }
             } else {
-                if (item.quality < MAX_QUALITY) {
-                    increaseQuality(item);
+                if (item.getQuality() < MAX_QUALITY) {
+                    item.increaseQuality(BASE_QUALITY_UNIT);
                 }
             }
         }
     }
 
-    private void decreaseQuality(Item item) {
-        item.quality = Math.max(0,item.quality - BASE_QUALITY_UNIT);
-    }
-
-    private void increaseQuality(Item item) {
-        item.quality = Math.min(50,item.quality + BASE_QUALITY_UNIT);
-    }
-
-    private boolean isItemExpired(Item item) {
-        return item.sellIn < DAY_OF_EXPIERY;
-    }
-
-    public void setQuality(Item item) {
-        item.quality = Math.max(0, Math.min(50, MIN_QUALITY));
-    }
 }
