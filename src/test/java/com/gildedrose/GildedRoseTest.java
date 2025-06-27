@@ -4,6 +4,7 @@ import static com.gildedrose.constants.TestConstants.AGED_BRIE;
 import static com.gildedrose.constants.TestConstants.BACKSTAGE_PASSES;
 import static com.gildedrose.constants.TestConstants.COLUMN_HEADING;
 import static com.gildedrose.constants.TestConstants.DEXTERITY_VEST;
+import static com.gildedrose.constants.TestConstants.DOUBLE_LINE_BREAK;
 import static com.gildedrose.constants.TestConstants.ELIXIR_OF_THE_MONGOOSE;
 import static com.gildedrose.constants.TestConstants.EXPIRED_BY_ONE_DAY;
 import static com.gildedrose.constants.TestConstants.FIFTEEN_DAYS_TO_SELL;
@@ -27,6 +28,10 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import org.approvaltests.Approvals;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+
+import java.util.Arrays;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 
 class GildedRoseTest {
@@ -55,17 +60,20 @@ class GildedRoseTest {
         GildedRose app = new GildedRose(items);
         StringBuilder output = new StringBuilder();
 
-        for (int day = ZERO_DAYS; day < THIRTYONE_DAYS; day++) {
-            output.append(HEADING_PREFIX).append(day).append(HEADING_SUFFIX);
-            output.append(COLUMN_HEADING).append(LINE_BREAK);
-            for (Item item : items) {
-
-                output.append(item).append(LINE_BREAK);
-            }
-            output.append(LINE_BREAK);
-            app.updateQuality();
-        }
+        IntStream.range(ZERO_DAYS, THIRTYONE_DAYS)
+                .forEach(day -> {
+                    appendOutputRenderingDays(day, output, items);
+                    app.updateQuality();
+                });
         Approvals.verify(output.toString());
+    }
+
+    private void appendOutputRenderingDays(int day, StringBuilder output, Item[] items) {
+        output.append(HEADING_PREFIX).append(day).append(HEADING_SUFFIX);
+        output.append(COLUMN_HEADING).append(LINE_BREAK);
+        output.append(Arrays.stream(items)
+                .map(Item::toString)
+                .collect(Collectors.joining(LINE_BREAK))).append(DOUBLE_LINE_BREAK);
     }
 
 

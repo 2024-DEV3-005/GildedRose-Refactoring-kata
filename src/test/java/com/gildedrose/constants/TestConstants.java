@@ -20,6 +20,7 @@ public class TestConstants {
     public static final String DEXTERITY_VEST = "+5 Dexterity Vest";
     public static final String ITEM_NAME_FOO = "foo";
     public static final String LINE_BREAK = "\n";
+    public static final String DOUBLE_LINE_BREAK = "\n\n";
     public static final String HEADING_PREFIX = "-------- day ";
     public static final String HEADING_SUFFIX = " --------\n";
     public static final String COLUMN_HEADING = "name, sellIn, quality";
