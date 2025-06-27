@@ -1,8 +1,19 @@
 package com.gildedrose;
 
+import static com.gildedrose.constants.AppConstants.AGED_BRIE;
+import static com.gildedrose.constants.AppConstants.BACKSTAGE_PASSES;
+import static com.gildedrose.constants.AppConstants.BASE_QUALITY_UNIT;
+import static com.gildedrose.constants.AppConstants.DAY_OF_EXPIERY;
+import static com.gildedrose.constants.AppConstants.MAX_QUALITY;
+import static com.gildedrose.constants.AppConstants.MIN_QUALITY;
+import static com.gildedrose.constants.AppConstants.QUALITY_OF_ELEVEN;
+import static com.gildedrose.constants.AppConstants.QUALITY_OF_SIX;
+import static com.gildedrose.constants.AppConstants.SULFURAS;
+
 import java.util.List;
 
 class GildedRose {
+
     List<Item> items;
 
     public GildedRose(List<Item> items) {
@@ -15,41 +26,45 @@ class GildedRose {
 
             decrementSellInDays(item);
 
-            if (item.sellIn < 0) {
-                if (!item.name.equals("Aged Brie")) {
-                    if (!item.name.equals("Backstage passes to a TAFKAL80ETC concert")) {
-                        if (item.quality > 0 && !item.name.equals("Sulfuras, Hand of Ragnaros")) {
-                            item.quality = item.quality - 1;
-                        }
-                    } else {
-                        item.quality = 0;
+            updateQualityAfterSellInByDate(item);
+        }
+    }
+
+    private void updateQualityAfterSellInByDate(Item item) {
+        if (item.sellIn < DAY_OF_EXPIERY) {
+            if (!item.name.equals(AGED_BRIE)) {
+                if (!item.name.equals(BACKSTAGE_PASSES)) {
+                    if (item.quality > MIN_QUALITY && !item.name.equals(SULFURAS)) {
+                        item.quality = item.quality - BASE_QUALITY_UNIT;
                     }
                 } else {
-                    if (item.quality < 50) {
-                        item.quality = item.quality + 1;
-                    }
+                    item.quality = MIN_QUALITY;
+                }
+            } else {
+                if (item.quality < MAX_QUALITY) {
+                    item.quality = item.quality + BASE_QUALITY_UNIT;
                 }
             }
         }
     }
 
     private void updateQualityBeforeSellInByDate(Item item) {
-        if (!item.name.equals("Aged Brie")
-                && !item.name.equals("Backstage passes to a TAFKAL80ETC concert")) {
-            if (item.quality > 0 && !item.name.equals("Sulfuras, Hand of Ragnaros")) {
-                item.quality = item.quality - 1;
+        if (!item.name.equals(AGED_BRIE)
+                && !item.name.equals(BACKSTAGE_PASSES)) {
+            if (item.quality > MIN_QUALITY && !item.name.equals(SULFURAS)) {
+                item.quality = item.quality - BASE_QUALITY_UNIT;
             }
         } else {
-            if (item.quality < 50) {
-                item.quality = item.quality + 1;
+            if (item.quality < MAX_QUALITY) {
+                item.quality = item.quality + BASE_QUALITY_UNIT;
 
-                if (item.name.equals("Backstage passes to a TAFKAL80ETC concert")) {
-                    if (item.sellIn < 11 && item.quality < 50) {
-                        item.quality = item.quality + 1;
+                if (item.name.equals(BACKSTAGE_PASSES)) {
+                    if (item.sellIn < QUALITY_OF_ELEVEN && item.quality < MAX_QUALITY) {
+                        item.quality = item.quality + BASE_QUALITY_UNIT;
                     }
 
-                    if (item.sellIn < 6 && item.quality < 50) {
-                        item.quality = item.quality + 1;
+                    if (item.sellIn < QUALITY_OF_SIX && item.quality < MAX_QUALITY) {
+                        item.quality = item.quality + BASE_QUALITY_UNIT;
                     }
                 }
             }
@@ -57,7 +72,7 @@ class GildedRose {
     }
 
     private void decrementSellInDays(Item item) {
-        if (!item.name.equals("Sulfuras, Hand of Ragnaros")) {
+        if (!item.name.equals(SULFURAS)) {
             decrementSellIn(item);
         }
     }
