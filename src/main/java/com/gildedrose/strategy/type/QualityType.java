@@ -7,6 +7,7 @@ import static com.gildedrose.constants.AppConstants.SULFURAS;
 
 import com.gildedrose.strategy.ItemQuality;
 import com.gildedrose.strategy.impl.AgedBrie;
+import com.gildedrose.strategy.impl.BackStagePasses;
 import com.gildedrose.strategy.impl.Conjured;
 import com.gildedrose.strategy.impl.NormalQuality;
 import com.gildedrose.strategy.impl.Sulfuras;
@@ -36,6 +37,10 @@ public enum QualityType {
     SULFURAS_LEGEND(SULFURAS) {;
         @Override
         public ItemQuality createStrategy() { return new Sulfuras(); }
+    },
+    BACKSTAGE_PASSES("Backstage passes to a TAFKAL80ETC concert") {;
+        @Override
+        public ItemQuality createStrategy() { return new BackStagePasses(); }
     };
 
     private static final Map<String, ItemQuality> behaviourMap = Stream.of(values()).

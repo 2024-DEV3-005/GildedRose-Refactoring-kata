@@ -11,8 +11,6 @@ public class AppConstants {
     public static final int DEGRADE_QUALITY_BY_TWO = 2;
     public static final int UPGRADE_QUALITY_BY_THREE = 3;
     public static final int UPGRADE_QUALITY_BY_TWO = 2;
-    public static final int QUALITY_OF_ELEVEN = 11;
-    public static final int QUALITY_OF_SIX = 6;
     public static final String AGED_BRIE = "Aged Brie";
     public static final String BACKSTAGE_PASSES = "Backstage passes to a TAFKAL80ETC concert";
     public static final String SULFURAS = "Sulfuras, Hand of Ragnaros";

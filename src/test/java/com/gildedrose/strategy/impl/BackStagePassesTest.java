@@ -1,6 +1,7 @@
 package com.gildedrose.strategy.impl;
 
 import static com.gildedrose.constants.TestConstants.BACKSTAGE_PASSES;
+import static com.gildedrose.constants.TestConstants.EXPIRED_BY_ONE_DAY;
 import static com.gildedrose.constants.TestConstants.FIVE_DAYS_TO_SELL;
 import static com.gildedrose.constants.TestConstants.FOUR_DAYS_TO_SELL;
 import static com.gildedrose.constants.TestConstants.QUALITY_OF_EIGHTEEN;
@@ -56,5 +57,16 @@ class BackStagePassesTest {
         backstagePasses.decrementSellInDays(backstagePassesItemAdapter);
 
         assertEquals(FOUR_DAYS_TO_SELL, backstagePassesItemAdapter.getSellIn(), "SellIn value should reduce by one");
+    }
+
+    @Test
+    @DisplayName("Backstage passes quality should be zero after sell-in date")
+    void updateQualityAfterSellInByDate() {
+        Item backstagePassesItem = new Item(BACKSTAGE_PASSES, EXPIRED_BY_ONE_DAY, QUALITY_OF_EIGHTEEN);
+        ItemAdapter backstagePassesItemAdapter = new ItemAdapter(backstagePassesItem);
+
+        backstagePasses.updateQualityAfterSellInByDate(backstagePassesItemAdapter);
+
+        assertEquals(0, backstagePassesItemAdapter.getQuality(), "Backstage passes quality should be zero");
     }
 }

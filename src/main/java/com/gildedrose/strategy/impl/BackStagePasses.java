@@ -2,6 +2,7 @@ package com.gildedrose.strategy.impl;
 
 import static com.gildedrose.constants.AppConstants.BASE_QUALITY_UNIT;
 import static com.gildedrose.constants.AppConstants.ELEVEN_DAYS_TO_SELL;
+import static com.gildedrose.constants.AppConstants.MIN_QUALITY;
 import static com.gildedrose.constants.AppConstants.SIX_DAYS_TO_SELL;
 import static com.gildedrose.constants.AppConstants.UPGRADE_QUALITY_BY_THREE;
 import static com.gildedrose.constants.AppConstants.UPGRADE_QUALITY_BY_TWO;
@@ -40,6 +41,8 @@ public class BackStagePasses implements ItemQuality {
 
     @Override
     public void updateQualityAfterSellInByDate(ItemAdapter backStagePassesItem) {
-
+        if(backStagePassesItem.isItemExpired()) {
+            backStagePassesItem.setQuality(MIN_QUALITY);
+        }
     }
 }
