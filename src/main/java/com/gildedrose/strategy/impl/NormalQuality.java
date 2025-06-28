@@ -6,7 +6,6 @@ import static com.gildedrose.constants.AppConstants.MAX_QUALITY;
 import static com.gildedrose.constants.AppConstants.MIN_QUALITY;
 import static com.gildedrose.constants.AppConstants.QUALITY_OF_ELEVEN;
 import static com.gildedrose.constants.AppConstants.QUALITY_OF_SIX;
-import static com.gildedrose.constants.AppConstants.SULFURAS;
 
 import com.gildedrose.adapter.ItemAdapter;
 import com.gildedrose.strategy.ItemQuality;
@@ -15,7 +14,7 @@ public class NormalQuality implements ItemQuality {
 
     public void updateQualityBeforeSellInByDate(ItemAdapter item) {
         if (!item.getName().equals(BACKSTAGE_PASSES)) {
-            if (item.getQuality() > MIN_QUALITY && !item.getName().equals(SULFURAS)) {
+            if (item.getQuality() > MIN_QUALITY) {
                 item.decreaseQuality(BASE_QUALITY_UNIT);
             }
         } else {
@@ -36,15 +35,13 @@ public class NormalQuality implements ItemQuality {
     }
 
     public void decrementSellInDays(ItemAdapter item) {
-        if (!item.getName().equals(SULFURAS)) {
-            item.decrementSellIn();
-        }
+        item.decrementSellIn();
     }
 
     public void updateQualityAfterSellInByDate(ItemAdapter item) {
         if (item.isItemExpired()) {
             if (!item.getName().equals(BACKSTAGE_PASSES)) {
-                if (item.getQuality() > MIN_QUALITY && !item.getName().equals(SULFURAS)) {
+                if (item.getQuality() > MIN_QUALITY) {
                     item.decreaseQuality(BASE_QUALITY_UNIT);
                 }
             } else {

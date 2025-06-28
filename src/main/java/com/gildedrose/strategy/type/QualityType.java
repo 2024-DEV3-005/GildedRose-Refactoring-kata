@@ -3,11 +3,13 @@ package com.gildedrose.strategy.type;
 import static com.gildedrose.constants.AppConstants.AGED_BRIE;
 import static com.gildedrose.constants.AppConstants.CONJURED_QUALITY;
 import static com.gildedrose.constants.AppConstants.NORMAL_QUALITY;
+import static com.gildedrose.constants.AppConstants.SULFURAS;
 
 import com.gildedrose.strategy.ItemQuality;
 import com.gildedrose.strategy.impl.AgedBrie;
 import com.gildedrose.strategy.impl.Conjured;
 import com.gildedrose.strategy.impl.NormalQuality;
+import com.gildedrose.strategy.impl.Sulfuras;
 
 import java.util.Map;
 import java.util.stream.Collectors;
@@ -30,6 +32,10 @@ public enum QualityType {
     AGEDBRIE(AGED_BRIE) {
         @Override
         public ItemQuality createStrategy() { return new AgedBrie(); }
+    },
+    SULFURAS_LEGEND(SULFURAS) {;
+        @Override
+        public ItemQuality createStrategy() { return new Sulfuras(); }
     };
 
     private static final Map<String, ItemQuality> behaviourMap = Stream.of(values()).
