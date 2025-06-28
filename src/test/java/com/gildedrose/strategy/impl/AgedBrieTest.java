@@ -1,8 +1,11 @@
 package com.gildedrose.strategy.impl;
 
 import static com.gildedrose.constants.TestConstants.AGED_BRIE;
+import static com.gildedrose.constants.TestConstants.EXPIRED_BY_ONE_DAY;
 import static com.gildedrose.constants.TestConstants.FIVE_DAYS_TO_SELL;
 import static com.gildedrose.constants.TestConstants.FOUR_DAYS_TO_SELL;
+import static com.gildedrose.constants.TestConstants.QUALITY_OF_EIGHTEEN;
+import static com.gildedrose.constants.TestConstants.QUALITY_OF_SIXTEEN;
 import static com.gildedrose.constants.TestConstants.QUALITY_OF_TWENTY;
 import static com.gildedrose.constants.TestConstants.QUALITY_OF_TWENTY_ONE;
 import static com.gildedrose.constants.TestConstants.TEN_DAYS_TO_SELL;
@@ -45,4 +48,15 @@ class AgedBrieTest {
         assertEquals(FOUR_DAYS_TO_SELL, agedBrieItem.sellIn, "SellIn value should reduce by one");
     }
 
+    @Test
+    @DisplayName("Aged Brie quality should increase by 2 after sell-in date")
+    void shouldIncreaseQualityByOneAfterSellIn() {
+        Item agedBrieItem = new Item(AGED_BRIE, EXPIRED_BY_ONE_DAY, QUALITY_OF_SIXTEEN);
+        ItemAdapter agedBrieItemAdapter = new ItemAdapter(agedBrieItem);
+
+        agedBrie.updateQualityBeforeSellInByDate(agedBrieItemAdapter);
+        agedBrie.updateQualityAfterSellInByDate(agedBrieItemAdapter);
+
+        assertEquals(QUALITY_OF_EIGHTEEN, agedBrieItemAdapter.getQuality(), "Aged Brie quality should increase by 2");
+    }
 }

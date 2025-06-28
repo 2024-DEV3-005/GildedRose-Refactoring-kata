@@ -19,6 +19,8 @@ public class AgedBrie implements ItemQuality {
 
     @Override
     public void updateQualityAfterSellInByDate(ItemAdapter agedBrieItem) {
-
+        if (agedBrieItem.isItemExpired()) {
+            agedBrieItem.increaseQuality(BASE_QUALITY_UNIT);
+        }
     }
 }
