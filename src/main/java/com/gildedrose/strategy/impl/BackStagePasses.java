@@ -5,6 +5,7 @@ import static com.gildedrose.constants.AppConstants.ELEVEN_DAYS_TO_SELL;
 import static com.gildedrose.constants.AppConstants.MAX_QUALITY;
 import static com.gildedrose.constants.AppConstants.QUALITY_OF_ELEVEN;
 import static com.gildedrose.constants.AppConstants.QUALITY_OF_SIX;
+import static com.gildedrose.constants.AppConstants.SIX_DAYS_TO_SELL;
 
 import com.gildedrose.adapter.ItemAdapter;
 import com.gildedrose.strategy.ItemQuality;
@@ -14,6 +15,9 @@ public class BackStagePasses implements ItemQuality {
     public void updateQualityBeforeSellInByDate(ItemAdapter backStagePassesItem) {
         backStagePassesItem.increaseQuality(1);
         if (backStagePassesItem.getSellIn() < ELEVEN_DAYS_TO_SELL) {
+            backStagePassesItem.increaseQuality(BASE_QUALITY_UNIT);
+        }
+        if(backStagePassesItem.getSellIn()<SIX_DAYS_TO_SELL){
             backStagePassesItem.increaseQuality(BASE_QUALITY_UNIT);
         }
     }
