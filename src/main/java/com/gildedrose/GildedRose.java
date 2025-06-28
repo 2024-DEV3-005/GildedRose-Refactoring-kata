@@ -3,6 +3,7 @@ package com.gildedrose;
 import com.gildedrose.adapter.ItemAdapter;
 import com.gildedrose.strategy.ItemQuality;
 import com.gildedrose.strategy.impl.NormalQuality;
+import com.gildedrose.strategy.type.QualityType;
 
 import java.util.List;
 
@@ -35,6 +36,6 @@ class GildedRose {
     }
 
     private ItemQuality createStrategyForItems(Item item) {
-        return new NormalQuality();
+        return QualityType.getStrategy(item.name);
     }
 }

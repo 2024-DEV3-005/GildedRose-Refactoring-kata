@@ -3,6 +3,7 @@ package com.gildedrose;
 import static com.gildedrose.constants.TestConstants.AGED_BRIE;
 import static com.gildedrose.constants.TestConstants.BACKSTAGE_PASSES;
 import static com.gildedrose.constants.TestConstants.COLUMN_HEADING;
+import static com.gildedrose.constants.TestConstants.CONJURED;
 import static com.gildedrose.constants.TestConstants.DEXTERITY_VEST;
 import static com.gildedrose.constants.TestConstants.DOUBLE_LINE_BREAK;
 import static com.gildedrose.constants.TestConstants.ELIXIR_OF_THE_MONGOOSE;
@@ -16,11 +17,13 @@ import static com.gildedrose.constants.TestConstants.LINE_BREAK;
 import static com.gildedrose.constants.TestConstants.MIN_QUALITY;
 import static com.gildedrose.constants.TestConstants.ONE_SHORT_OF_MAX_QUALITY;
 import static com.gildedrose.constants.TestConstants.QUALITY_OF_SEVEN;
+import static com.gildedrose.constants.TestConstants.QUALITY_OF_SIX;
 import static com.gildedrose.constants.TestConstants.QUALITY_OF_TWENTY;
 import static com.gildedrose.constants.TestConstants.SULFURAS;
 import static com.gildedrose.constants.TestConstants.SULFURAS_MAX_QUALITY;
 import static com.gildedrose.constants.TestConstants.TEN_DAYS_TO_SELL;
 import static com.gildedrose.constants.TestConstants.THIRTYONE_DAYS;
+import static com.gildedrose.constants.TestConstants.THREE_DAYS_TO_SELL;
 import static com.gildedrose.constants.TestConstants.TWO_DAYS_TO_SELL;
 import static com.gildedrose.constants.TestConstants.ZERO_DAYS;
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -55,7 +58,8 @@ class GildedRoseTest {
                 new Item(SULFURAS, EXPIRED_BY_ONE_DAY, SULFURAS_MAX_QUALITY),
                 new Item(BACKSTAGE_PASSES, FIFTEEN_DAYS_TO_SELL, QUALITY_OF_TWENTY),
                 new Item(BACKSTAGE_PASSES, TEN_DAYS_TO_SELL, ONE_SHORT_OF_MAX_QUALITY),
-                new Item(BACKSTAGE_PASSES, FIVE_DAYS_TO_SELL, ONE_SHORT_OF_MAX_QUALITY));
+                new Item(BACKSTAGE_PASSES, FIVE_DAYS_TO_SELL, ONE_SHORT_OF_MAX_QUALITY),
+                new Item(CONJURED, THREE_DAYS_TO_SELL, QUALITY_OF_SIX));
 
         GildedRose app = new GildedRose(items);
         StringBuilder output = new StringBuilder();
