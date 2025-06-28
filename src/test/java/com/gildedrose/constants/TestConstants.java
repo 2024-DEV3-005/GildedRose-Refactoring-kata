@@ -4,6 +4,7 @@ public class TestConstants {
     public static final int ZERO_DAYS = 0;
     public static final int EXPIRED_BY_ONE_DAY = -1;
     public static final int TWO_DAYS_TO_SELL = 2;
+    public static final int FOUR_DAYS_TO_SELL = 4;
     public static final int FIVE_DAYS_TO_SELL = 5;
     public static final int TEN_DAYS_TO_SELL = 10;
     public static final int FIFTEEN_DAYS_TO_SELL = 15;

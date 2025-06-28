@@ -15,7 +15,7 @@ public class Conjured implements ItemQuality {
 
     @Override
     public void decrementSellInDays(ItemAdapter conjuredItem) {
-
+        conjuredItem.decrementSellIn();
     }
 
     @Override
