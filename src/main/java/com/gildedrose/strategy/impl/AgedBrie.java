@@ -14,6 +14,7 @@ public class AgedBrie implements ItemQuality {
 
     @Override
     public void decrementSellInDays(ItemAdapter agedBrieItem) {
+        agedBrieItem.decrementSellIn();
     }
 
     @Override
