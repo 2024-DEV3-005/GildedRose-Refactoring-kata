@@ -6,6 +6,7 @@ public class AppConstants {
     public static final int MAX_QUALITY = 50;
     public static final int DAY_OF_EXPIERY = 0;
     public static final int BASE_QUALITY_UNIT = 1;
+    public static final int DEGRADE_QUALITY_BY_TWO = 2;
     public static final int QUALITY_OF_ELEVEN = 11;
     public static final int QUALITY_OF_SIX = 6;
     public static final String AGED_BRIE = "Aged Brie";
