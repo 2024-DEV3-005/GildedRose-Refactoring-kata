@@ -1,9 +1,11 @@
 package com.gildedrose.strategy.type;
 
+import static com.gildedrose.constants.AppConstants.AGED_BRIE;
 import static com.gildedrose.constants.AppConstants.CONJURED_QUALITY;
 import static com.gildedrose.constants.AppConstants.NORMAL_QUALITY;
 
 import com.gildedrose.strategy.ItemQuality;
+import com.gildedrose.strategy.impl.AgedBrie;
 import com.gildedrose.strategy.impl.Conjured;
 import com.gildedrose.strategy.impl.NormalQuality;
 
@@ -24,6 +26,10 @@ public enum QualityType {
         public ItemQuality createStrategy() {
             return new NormalQuality();
         }
+    },
+    AGEDBRIE(AGED_BRIE) {
+        @Override
+        public ItemQuality createStrategy() { return new AgedBrie(); }
     };
 
     private static final Map<String, ItemQuality> behaviourMap = Stream.of(values()).

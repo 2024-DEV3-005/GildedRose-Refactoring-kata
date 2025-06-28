@@ -4,6 +4,7 @@ import static com.gildedrose.constants.TestConstants.AGED_BRIE;
 import static com.gildedrose.constants.TestConstants.EXPIRED_BY_ONE_DAY;
 import static com.gildedrose.constants.TestConstants.FIVE_DAYS_TO_SELL;
 import static com.gildedrose.constants.TestConstants.FOUR_DAYS_TO_SELL;
+import static com.gildedrose.constants.TestConstants.MAX_QUALITY;
 import static com.gildedrose.constants.TestConstants.QUALITY_OF_EIGHTEEN;
 import static com.gildedrose.constants.TestConstants.QUALITY_OF_SIXTEEN;
 import static com.gildedrose.constants.TestConstants.QUALITY_OF_TWENTY;
@@ -13,6 +14,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import com.gildedrose.Item;
 import com.gildedrose.adapter.ItemAdapter;
+import com.gildedrose.constants.TestConstants;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -58,5 +60,17 @@ class AgedBrieTest {
         agedBrie.updateQualityAfterSellInByDate(agedBrieItemAdapter);
 
         assertEquals(QUALITY_OF_EIGHTEEN, agedBrieItemAdapter.getQuality(), "Aged Brie quality should increase by 2");
+    }
+
+    @Test
+    @DisplayName("Aged Brie quality should not exceed 50")
+    void shouldNotExceedMaxQuality() {
+        Item agedBrieItem = new Item(AGED_BRIE, TEN_DAYS_TO_SELL, MAX_QUALITY);
+        ItemAdapter agedBrieItemAdapter = new ItemAdapter(agedBrieItem);
+
+        agedBrie.updateQualityBeforeSellInByDate(agedBrieItemAdapter);
+        agedBrie.updateQualityAfterSellInByDate(agedBrieItemAdapter);
+
+        assertEquals(MAX_QUALITY, agedBrieItemAdapter.getQuality(), "Aged Brie quality should not exceed 50");
     }
 }
