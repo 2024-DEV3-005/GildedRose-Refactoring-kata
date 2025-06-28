@@ -1,6 +1,7 @@
 package com.gildedrose.strategy.type;
 
 import static com.gildedrose.constants.AppConstants.AGED_BRIE;
+import static com.gildedrose.constants.AppConstants.BACKSTAGE_PASSES;
 import static com.gildedrose.constants.AppConstants.CONJURED_QUALITY;
 import static com.gildedrose.constants.AppConstants.NORMAL_QUALITY;
 import static com.gildedrose.constants.AppConstants.SULFURAS;
@@ -38,7 +39,7 @@ public enum QualityType {
         @Override
         public ItemQuality createStrategy() { return new Sulfuras(); }
     },
-    BACKSTAGE_PASSES("Backstage passes to a TAFKAL80ETC concert") {;
+    BACKSTAGE_PASS(BACKSTAGE_PASSES) {;
         @Override
         public ItemQuality createStrategy() { return new BackStagePasses(); }
     };
