@@ -16,6 +16,7 @@ public class TestConstants {
     public static final int QUALITY_OF_EIGHTEEN = 18;
     public static final int QUALITY_OF_SIXTEEN = 16;
     public static final int QUALITY_OF_TWENTY = 20;
+    public static final int QUALITY_OF_TWENTY_ONE = 21;
     public static final int ONE_SHORT_OF_MAX_QUALITY = 49;
     public static final int SULFURAS_MAX_QUALITY = 80;
     public static final String AGED_BRIE = "Aged Brie";
