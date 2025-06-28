@@ -2,6 +2,7 @@ package com.gildedrose.strategy.impl;
 
 import static com.gildedrose.constants.TestConstants.BACKSTAGE_PASSES;
 import static com.gildedrose.constants.TestConstants.FIVE_DAYS_TO_SELL;
+import static com.gildedrose.constants.TestConstants.FOUR_DAYS_TO_SELL;
 import static com.gildedrose.constants.TestConstants.QUALITY_OF_EIGHTEEN;
 import static com.gildedrose.constants.TestConstants.QUALITY_OF_SIXTEEN;
 import static com.gildedrose.constants.TestConstants.QUALITY_OF_TWENTY_ONE;
@@ -46,4 +47,14 @@ class BackStagePassesTest {
         assertEquals(QUALITY_OF_TWENTY_ONE, backstagePassesItemAdapter.getQuality(), "Backstage passes quality should increase by 3");
     }
 
+    @Test
+    @DisplayName("SellIn value reduces by one for Backstage Passes item")
+    void decrementSellInDays() {
+        Item backstagePassesItem = new Item(BACKSTAGE_PASSES, FIVE_DAYS_TO_SELL, QUALITY_OF_SIXTEEN);
+        ItemAdapter backstagePassesItemAdapter = new ItemAdapter(backstagePassesItem);
+
+        backstagePasses.decrementSellInDays(backstagePassesItemAdapter);
+
+        assertEquals(FOUR_DAYS_TO_SELL, backstagePassesItemAdapter.getSellIn(), "SellIn value should reduce by one");
+    }
 }

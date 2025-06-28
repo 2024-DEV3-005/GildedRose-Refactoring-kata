@@ -35,7 +35,7 @@ public class BackStagePasses implements ItemQuality {
 
     @Override
     public void decrementSellInDays(ItemAdapter backStagePassesItem) {
-
+        backStagePassesItem.decrementSellIn();
     }
 
     @Override
