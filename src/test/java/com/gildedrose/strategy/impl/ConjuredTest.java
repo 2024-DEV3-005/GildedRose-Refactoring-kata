@@ -1,8 +1,10 @@
 package com.gildedrose.strategy.impl;
 
 import static com.gildedrose.constants.TestConstants.CONJURED;
+import static com.gildedrose.constants.TestConstants.EXPIRED_BY_ONE_DAY;
 import static com.gildedrose.constants.TestConstants.FIVE_DAYS_TO_SELL;
 import static com.gildedrose.constants.TestConstants.QUALITY_OF_EIGHTEEN;
+import static com.gildedrose.constants.TestConstants.QUALITY_OF_SIXTEEN;
 import static com.gildedrose.constants.TestConstants.QUALITY_OF_TWENTY;
 import static com.gildedrose.constants.TestConstants.TEN_DAYS_TO_SELL;
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -43,6 +45,18 @@ class ConjuredTest {
         conjured.decrementSellInDays(conjuredItemAdapter);
 
         assertEquals(TestConstants.FOUR_DAYS_TO_SELL, conjuredItem.sellIn, "SellIn value should reduce by one");
+    }
+
+    @Test
+    @DisplayName("Conjured item quality should degrade by 4 after sell-in date")
+    public void shouldDecreaseQualityByFourIfExpired() {
+        Item conjuredItem = new Item(CONJURED, EXPIRED_BY_ONE_DAY, QUALITY_OF_TWENTY);
+        ItemAdapter conjuredItemAdapter = new ItemAdapter(conjuredItem);
+
+        conjured.updateQualityBeforeSellInByDate(conjuredItemAdapter);
+        conjured.updateQualityAfterSellInByDate(conjuredItemAdapter);
+
+        assertEquals(QUALITY_OF_SIXTEEN, conjuredItemAdapter.getQuality(), "Conjured item quality should decrease by 4");
     }
 
 }

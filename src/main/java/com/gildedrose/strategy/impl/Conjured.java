@@ -1,16 +1,15 @@
 package com.gildedrose.strategy.impl;
 
+import static com.gildedrose.constants.AppConstants.DEGRADE_QUALITY_BY_TWO;
+
 import com.gildedrose.adapter.ItemAdapter;
-import com.gildedrose.constants.AppConstants;
 import com.gildedrose.strategy.ItemQuality;
 
 public class Conjured implements ItemQuality {
 
     @Override
     public void updateQualityBeforeSellInByDate(ItemAdapter conjuredItem) {
-        if (!conjuredItem.isItemExpired()) {
-            conjuredItem.decreaseQuality(AppConstants.DEGRADE_QUALITY_BY_TWO);
-        }
+        conjuredItem.decreaseQuality(DEGRADE_QUALITY_BY_TWO);
     }
 
     @Override
@@ -20,7 +19,8 @@ public class Conjured implements ItemQuality {
 
     @Override
     public void updateQualityAfterSellInByDate(ItemAdapter conjuredItem) {
-
+        if (conjuredItem.isItemExpired()) {
+            conjuredItem.decreaseQuality(DEGRADE_QUALITY_BY_TWO);
+        }
     }
-
 }

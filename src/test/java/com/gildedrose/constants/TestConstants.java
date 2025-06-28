@@ -12,6 +12,7 @@ public class TestConstants {
     public static final int MIN_QUALITY = 0;
     public static final int QUALITY_OF_SEVEN = 7;
     public static final int QUALITY_OF_EIGHTEEN = 18;
+    public static final int QUALITY_OF_SIXTEEN = 16;
     public static final int QUALITY_OF_TWENTY = 20;
     public static final int ONE_SHORT_OF_MAX_QUALITY = 49;
     public static final int SULFURAS_MAX_QUALITY = 80;
